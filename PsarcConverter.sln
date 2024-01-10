@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34024.191
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PsarcConverter", "PsarcConverter\PsarcConverter.csproj", "{A0794F02-ADC9-46FF-AF90-5565C7426502}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0794F02-ADC9-46FF-AF90-5565C7426502}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0794F02-ADC9-46FF-AF90-5565C7426502}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0794F02-ADC9-46FF-AF90-5565C7426502}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0794F02-ADC9-46FF-AF90-5565C7426502}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D6BF81B9-DA6D-4E2F-8790-3E6DEF860F81}
+	EndGlobalSection
+EndGlobal
