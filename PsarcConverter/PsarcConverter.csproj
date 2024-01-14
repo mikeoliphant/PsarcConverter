@@ -1,10 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net7.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<UseWPF>true</UseWPF>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
-  </PropertyGroup>
+	<ItemGroup>
+		<None Remove="Resources\ButtonPressed.png" />
+		<None Remove="Resources\ButtonUnpressed.png" />
+		<None Remove="Resources\Outline.png" />
+		<None Remove="Resources\OutlineNinePatch.png" />
+		<None Remove="Resources\ShadowedOutline.png" />
+	</ItemGroup>
 
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\ButtonPressed.png" />
+		<EmbeddedResource Include="Resources\ButtonUnpressed.png" />
+		<EmbeddedResource Include="Resources\Outline.png" />
+		<EmbeddedResource Include="Resources\ShadowedOutline.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Dependencies\PsarcUtil\PsarcUtil\PsarcUtil.csproj" />
+		<ProjectReference Include="..\Dependencies\UILayout\UILayout.Skia.WPF\UILayout.Skia.WPF.csproj" />
+	</ItemGroup>
 </Project>
