@@ -1,0 +1,6 @@
+[submodule "Dependencies/UILayout"]
+	path = Dependencies/UILayout
+	url = https://github.com/mikeoliphant/UILayout
+[submodule "Dependencies/PsarcUtil"]
+	path = Dependencies/PsarcUtil
+	url = https://github.com/mikeoliphant/PsarcUtil
