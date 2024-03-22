@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using UILayout;
 
 namespace PsarcConverter
@@ -10,13 +11,22 @@ namespace PsarcConverter
     {
         SkiaLayout ui = new SkiaLayout();
 
+        MainInterface mainInterface;
+
         public MainWindow()
         {
             InitializeComponent();
 
-            ui.RootUIElement = new MainInterface();
+            ui.RootUIElement = mainInterface = new MainInterface();
 
             SkiaCanvas.SetLayout(ui);
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            mainInterface.SaveOptions();
+
+            base.OnClosing(e);
         }
     }
 }

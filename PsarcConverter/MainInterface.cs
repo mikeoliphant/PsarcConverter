@@ -4,17 +4,20 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using UILayout;
-using PsarcUtil;
 using SkiaSharp;
 
 namespace PsarcConverter
 {
     public class MainInterface : VerticalStack
     {
-        List<string> parseFiles = new();
-        List<string> parseFolders = new();
+        string saveFolder;
+        string saveFile;
+
+        ConvertOptions convertOptions = new ConvertOptions();
 
         NinePatchWrapper topSection;
+
+        TextBlock songOutputText;
 
         VerticalStack fileStack;
         VerticalStack folderStack;
@@ -23,7 +26,7 @@ namespace PsarcConverter
         TextBlock currentlyConverting;
         int songsConverted;
         TextBlock songsConvertedText;
-        TextButton convertButton;
+        TextButton convertButton;       
 
         OpenFileDialog openFileDialog = new OpenFileDialog();
         FolderBrowserDialog openFolderDialog = new FolderBrowserDialog();
@@ -49,13 +52,28 @@ namespace PsarcConverter
 
         public MainInterface()
         {
+            saveFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "PsarcConverter");
+            saveFile = Path.Combine(saveFolder, "Options.xml");
+
+            try
+            {
+                if (!Directory.Exists(saveFolder))
+                {
+                    Directory.CreateDirectory(saveFolder);
+                }
+
+                convertOptions = ConvertOptions.Load(saveFile);
+            }
+            catch { }
+
             HorizontalAlignment = EHorizontalAlignment.Stretch;
             VerticalAlignment = EVerticalAlignment.Stretch;
             Padding = new LayoutPadding(5);
             BackgroundColor = UIColor.Lerp(UIColor.White, UIColor.Black, 0.1f);
 
-            parseFiles.Add(@"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\songs.psarc");
-            parseFolders.Add(@"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\dlc");
+            //convertOptions.SongOutputPath = @"C:\Share\JamSongs";
+            convertOptions.ParseFiles.Add(@"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\songs.psarc");
+            convertOptions.ParseFolders.Add(@"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\dlc");
 
             topSection = new NinePatchWrapper(Layout.Current.GetImage("Outline"))
             {
@@ -71,7 +89,28 @@ namespace PsarcConverter
             };
             topSection.Child = topStack;
 
-            topStack.Children.Add(new TextBlock("Files:")
+            topStack.Children.Add(new TextBlock("Song Output Folder:")
+            {
+                Padding = new LayoutPadding(0, 10)
+            });
+
+            HorizontalStack pathStack = new HorizontalStack()
+            {
+                ChildSpacing = 10
+            };
+            topStack.Children.Add(pathStack);
+
+            pathStack.Children.Add(songOutputText = new TextBlock(convertOptions.SongOutputPath)
+            {
+                VerticalAlignment = EVerticalAlignment.Center
+            });
+            
+            pathStack.Children.Add(new TextButton("Select")
+            {
+                ClickAction = SelectSongPath
+            });
+
+            topStack.Children.Add(new TextBlock("Psarc Files:")
             {
                 Padding = new LayoutPadding(0, 10)
             });
@@ -88,7 +127,7 @@ namespace PsarcConverter
                 ClickAction = AddFile
             });
 
-            topStack.Children.Add(new TextBlock("Folders:")
+            topStack.Children.Add(new TextBlock("Psarc Folders:")
             {
                 Padding = new LayoutPadding(0, 10)
             });
@@ -144,13 +183,36 @@ namespace PsarcConverter
             convertDock.Children.Add(convertButton);
         }
 
+        public void SaveOptions()
+        {
+            convertOptions.Save(saveFile);
+        }
+
+        void SelectSongPath()
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+
+            dialog.SelectedPath = convertOptions.SongOutputPath;
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                convertOptions.SongOutputPath = dialog.SelectedPath;
+
+                songOutputText.Text = convertOptions.SongOutputPath;
+
+                UpdateContentLayout();
+
+                SaveOptions();
+            }
+        }
+
         void AddFolder()
         {
             if (openFolderDialog.ShowDialog() == DialogResult.OK)
             {
-                if (!string.IsNullOrEmpty(openFolderDialog.SelectedPath) && !parseFolders.Contains(openFolderDialog.SelectedPath))
+                if (!string.IsNullOrEmpty(openFolderDialog.SelectedPath) && !convertOptions.ParseFolders.Contains(openFolderDialog.SelectedPath))
                 {
-                    parseFolders.Add(openFolderDialog.SelectedPath);
+                    convertOptions.ParseFolders.Add(openFolderDialog.SelectedPath);
 
                     UpdateSources();
                 }
@@ -159,7 +221,7 @@ namespace PsarcConverter
 
         void DeleteFolder(string path)
         {
-            parseFolders.Remove(path);
+            convertOptions.ParseFolders.Remove(path);
 
             UpdateSources();
         }
@@ -170,9 +232,9 @@ namespace PsarcConverter
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (!string.IsNullOrEmpty(openFileDialog.FileName) && !parseFiles.Contains(openFileDialog.FileName))
+                if (!string.IsNullOrEmpty(openFileDialog.FileName) && !convertOptions.ParseFiles.Contains(openFileDialog.FileName))
                 {
-                    parseFiles.Add(openFileDialog.FileName);
+                    convertOptions.ParseFiles.Add(openFileDialog.FileName);
 
                     UpdateSources();
                 }
@@ -181,7 +243,7 @@ namespace PsarcConverter
 
         void DeleteFile(string file)
         {
-            parseFiles.Remove(file);
+            convertOptions.ParseFiles.Remove(file);
 
             UpdateSources();
         }
@@ -190,7 +252,7 @@ namespace PsarcConverter
         {
             folderStack.Children.Clear();
             
-            foreach (string folder in parseFolders)
+            foreach (string folder in convertOptions.ParseFolders)
             {
                 HorizontalStack stack = new HorizontalStack()
                 {
@@ -212,7 +274,7 @@ namespace PsarcConverter
 
             fileStack.Children.Clear();
 
-            foreach (string file in parseFiles)
+            foreach (string file in convertOptions.ParseFiles)
             {
                 HorizontalStack stack = new HorizontalStack()
                 {
@@ -233,6 +295,8 @@ namespace PsarcConverter
             }
 
             UpdateContentLayout();
+
+            SaveOptions();
         }
 
         bool UpdateConvert(string text)
@@ -256,6 +320,13 @@ namespace PsarcConverter
 
         void ConvertFiles()
         {
+            if (string.IsNullOrEmpty(convertOptions.SongOutputPath))
+            {
+                MessageBox.Show("Please select a song output path.", "Error");
+
+                return;
+            }
+
             if (convertThread != null)
             {
                 abortConversion = true;
@@ -285,13 +356,13 @@ namespace PsarcConverter
             PsarcUtil.PsarcConverter converter = new PsarcUtil.PsarcConverter(@"C:\Share\JamSongs", convertAudio: false);
             converter.UpdateAction = UpdateConvert;
 
-            foreach (string file in parseFiles)
+            foreach (string file in convertOptions.ParseFiles)
             {
                 if (!converter.ConvertPsarc(file))
                     return;
             }
 
-            foreach (string folder in parseFolders)
+            foreach (string folder in convertOptions.ParseFolders)
             {
                 if (!converter.ConvertFolder(folder))
                     return;
