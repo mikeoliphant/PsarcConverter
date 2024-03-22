@@ -19,7 +19,7 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build
+      run: dotnet build --configuration Release
     - name: Create Archive
       uses: actions/upload-artifact@v1
       with:
