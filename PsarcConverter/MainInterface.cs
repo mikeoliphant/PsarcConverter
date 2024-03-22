@@ -282,7 +282,7 @@ namespace PsarcConverter
         {
             songsConverted = 0;
 
-            PsarcUtil.PsarcConverter converter = new PsarcUtil.PsarcConverter(@"C:\Share\TestConvert", convertAudio: false);
+            PsarcUtil.PsarcConverter converter = new PsarcUtil.PsarcConverter(@"C:\Share\JamSongs", convertAudio: false);
             converter.UpdateAction = UpdateConvert;
 
             foreach (string file in parseFiles)
