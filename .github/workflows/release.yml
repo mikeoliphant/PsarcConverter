@@ -1,0 +1,57 @@
+name: Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create_release:
+    name: Create release
+    runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{steps.create_release.outputs.upload_url}}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3.3.0
+        with:
+          submodules: recursive
+
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          draft: true
+          tag_name: ${{github.ref}}
+          release_name: Release ${{github.ref}}
+
+  build-windows:
+    name: Build Windows
+    needs: create_release
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3.3.0
+      with:
+        submodules: recursive
+
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '7.0.x'
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release
+
+    - name: Create Archive
+      run: Compress-Archive -Path ${{github.workspace}}\PsarcConverter\bin\Release\net7.0-windows\* -Destination PsarcConverter.zip
+    
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ needs.create_release.outputs.upload_url }}
+        asset_path: ./PsarcConverter.zip
+        asset_name: PsarcConverter.zip
+        asset_content_type: application/zip
