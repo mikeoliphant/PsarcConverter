@@ -1,0 +1,22 @@
+name: Build
+
+on:
+  [workflow_dispatch, push, pull_request]
+  
+jobs:
+  build-windows:
+    name: Build Windows
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3.3.0
+      with:
+        submodules: recursive
+
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '7.0.x'
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build
