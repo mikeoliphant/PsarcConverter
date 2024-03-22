@@ -13,7 +13,7 @@ namespace PsarcConverter
         string saveFolder;
         string saveFile;
 
-        ConvertOptions convertOptions = new ConvertOptions();
+        ConvertOptions convertOptions;
 
         NinePatchWrapper topSection;
 
@@ -66,14 +66,18 @@ namespace PsarcConverter
             }
             catch { }
 
+            if (convertOptions == null)
+            {
+                convertOptions = new ConvertOptions();
+
+                convertOptions.ParseFiles.Add(@"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\songs.psarc");
+                convertOptions.ParseFolders.Add(@"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\dlc");
+            }
+
             HorizontalAlignment = EHorizontalAlignment.Stretch;
             VerticalAlignment = EVerticalAlignment.Stretch;
             Padding = new LayoutPadding(5);
             BackgroundColor = UIColor.Lerp(UIColor.White, UIColor.Black, 0.1f);
-
-            //convertOptions.SongOutputPath = @"C:\Share\JamSongs";
-            convertOptions.ParseFiles.Add(@"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\songs.psarc");
-            convertOptions.ParseFolders.Add(@"C:\Program Files (x86)\Steam\steamapps\common\Rocksmith2014\dlc");
 
             topSection = new NinePatchWrapper(Layout.Current.GetImage("Outline"))
             {
