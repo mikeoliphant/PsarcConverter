@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using UILayout;
 using SkiaSharp;
@@ -31,8 +32,8 @@ namespace PsarcConverter
         OpenFileDialog openFileDialog = new OpenFileDialog();
         FolderBrowserDialog openFolderDialog = new FolderBrowserDialog();
 
-        Thread convertThread;
         bool abortConversion;
+        bool convertRunning;
 
         static MainInterface()
         {
@@ -331,25 +332,27 @@ namespace PsarcConverter
                 return;
             }
 
-            if (convertThread != null)
+            if (convertRunning)
             {
                 abortConversion = true;
-
-                convertThread.Join();
-                convertThread = null;
-
-                convertButton.Text = "Convert Files";
-
-                convertButton.UpdateContentLayout();
             }
             else
             {
-                convertThread = new Thread(new ThreadStart(DoConvert));
-                convertThread.Start();
+                convertRunning = true;
 
                 convertButton.Text = "Abort Conversion";
-
                 UpdateContentLayout();
+
+                Task.Run(() =>
+                {
+                    DoConvert();
+
+                    convertRunning = false;
+
+                    convertButton.Text = "Convert Files";
+
+                    convertButton.UpdateContentLayout();
+                });
             }
         }
 
@@ -357,7 +360,7 @@ namespace PsarcConverter
         {
             songsConverted = 0;
 
-            PsarcUtil.PsarcConverter converter = new PsarcUtil.PsarcConverter(@"C:\Share\JamSongs", convertAudio: false);
+            PsarcUtil.PsarcConverter converter = new PsarcUtil.PsarcConverter(convertOptions.SongOutputPath, convertAudio: false);
             converter.UpdateAction = UpdateConvert;
 
             foreach (string file in convertOptions.ParseFiles)
@@ -371,6 +374,8 @@ namespace PsarcConverter
                 if (!converter.ConvertFolder(folder))
                     return;
             }
+
+            return;
         }
     }
 }
