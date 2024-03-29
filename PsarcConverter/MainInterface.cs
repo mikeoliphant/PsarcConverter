@@ -365,14 +365,22 @@ namespace PsarcConverter
 
             foreach (string file in convertOptions.ParseFiles)
             {
-                if (!converter.ConvertPsarc(file))
-                    return;
+                try
+                {
+                    if (!converter.ConvertPsarc(file))
+                        return;
+                }
+                catch { }
             }
 
             foreach (string folder in convertOptions.ParseFolders)
             {
-                if (!converter.ConvertFolder(folder))
-                    return;
+                try
+                {
+                    if (!converter.ConvertFolder(folder))
+                        return;
+                }
+                catch { }
             }
 
             return;
