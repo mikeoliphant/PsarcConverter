@@ -15,6 +15,8 @@ namespace PsarcConverter
 
         public MainWindow()
         {
+            Title = "PsarcConverter v0.1.3";
+
             InitializeComponent();
 
             ui.RootUIElement = mainInterface = new MainInterface();

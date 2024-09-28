@@ -6,7 +6,7 @@
         xmlns:wpf="clr-namespace:UILayout.Skia.WPF;assembly=UILayout.Skia.WPF"
         xmlns:local="clr-namespace:PsarcConverter"
         mc:Ignorable="d"
-        Title="PsarcConverter" Height="600" Width="1024">
+        Height="600" Width="1024">
     <Grid>
         <wpf:LayoutControl x:Name="SkiaCanvas" />
     </Grid>
