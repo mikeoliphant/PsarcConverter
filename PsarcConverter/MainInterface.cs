@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UILayout;
 using SkiaSharp;
+using System.Drawing.Design;
 
 namespace PsarcConverter
 {
@@ -176,7 +177,7 @@ namespace PsarcConverter
             songsConvertedText = new TextBlock("");
             convertStack.Children.Add(songsConvertedText);
 
-            currentlyConverting = new TextBlock("");
+            currentlyConverting = new TextBlock("") { Padding = new LayoutPadding(0, 3) };
             convertStack.Children.Add(currentlyConverting);
 
             convertButton = new TextButton("Convert Files")
@@ -350,6 +351,8 @@ namespace PsarcConverter
                     convertRunning = false;
 
                     convertButton.Text = "Convert Files";
+
+                    UpdateConvert("Finished");
 
                     convertButton.UpdateContentLayout();
                 });
