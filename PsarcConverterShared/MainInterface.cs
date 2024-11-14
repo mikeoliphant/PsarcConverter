@@ -1,9 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using UILayout;
-using SkiaSharp;
 
 namespace PsarcConverter
 {
@@ -27,16 +25,11 @@ namespace PsarcConverter
         TextBlock songsConvertedText;
         TextButton convertButton;       
 
-        OpenFileDialog openFileDialog = new OpenFileDialog();
-        FolderBrowserDialog openFolderDialog = new FolderBrowserDialog();
-
         bool abortConversion;
         bool convertRunning;
 
         static MainInterface()
         {
-            Layout.Current.DefaultFont = new UIFont { Typeface = SKTypeface.FromFamilyName("Arial", SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright), TextSize = 16 };
-
             Layout.Current.DefaultOutlineNinePatch = Layout.Current.AddImage("ShadowedOutline");
 
             Layout.Current.DefaultPressedNinePatch = Layout.Current.AddImage("ButtonPressed");
@@ -193,13 +186,11 @@ namespace PsarcConverter
 
         void SelectSongPath()
         {
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            string newPath = Layout.Current.GetFolder("Song Path", convertOptions.SongOutputPath);
 
-            dialog.SelectedPath = convertOptions.SongOutputPath;
-
-            if (dialog.ShowDialog() == DialogResult.OK)
+            if (!string.IsNullOrEmpty(newPath))
             {
-                convertOptions.SongOutputPath = dialog.SelectedPath;
+                convertOptions.SongOutputPath = newPath;
 
                 songOutputText.Text = convertOptions.SongOutputPath;
 
@@ -211,15 +202,15 @@ namespace PsarcConverter
 
         void AddFolder()
         {
-            if (openFolderDialog.ShowDialog() == DialogResult.OK)
-            {
-                if (!string.IsNullOrEmpty(openFolderDialog.SelectedPath) && !convertOptions.ParseFolders.Contains(openFolderDialog.SelectedPath))
-                {
-                    convertOptions.ParseFolders.Add(openFolderDialog.SelectedPath);
+            //if (openFolderDialog.ShowDialog() == DialogResult.OK)
+            //{
+            //    if (!string.IsNullOrEmpty(openFolderDialog.SelectedPath) && !convertOptions.ParseFolders.Contains(openFolderDialog.SelectedPath))
+            //    {
+            //        convertOptions.ParseFolders.Add(openFolderDialog.SelectedPath);
 
-                    UpdateSources();
-                }
-            }
+            //        UpdateSources();
+            //    }
+            //}
         }
 
         void DeleteFolder(string path)
@@ -231,17 +222,17 @@ namespace PsarcConverter
 
         void AddFile()
         {
-            openFileDialog.Filter = "Psarc Files|*.psarc";
+            //openFileDialog.Filter = "Psarc Files|*.psarc";
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                if (!string.IsNullOrEmpty(openFileDialog.FileName) && !convertOptions.ParseFiles.Contains(openFileDialog.FileName))
-                {
-                    convertOptions.ParseFiles.Add(openFileDialog.FileName);
+            //if (openFileDialog.ShowDialog() == DialogResult.OK)
+            //{
+            //    if (!string.IsNullOrEmpty(openFileDialog.FileName) && !convertOptions.ParseFiles.Contains(openFileDialog.FileName))
+            //    {
+            //        convertOptions.ParseFiles.Add(openFileDialog.FileName);
 
-                    UpdateSources();
-                }
-            }
+            //        UpdateSources();
+            //    }
+            //}
         }
 
         void DeleteFile(string file)
@@ -325,7 +316,7 @@ namespace PsarcConverter
         {
             if (string.IsNullOrEmpty(convertOptions.SongOutputPath))
             {
-                MessageBox.Show("Please select a song output path.", "Error");
+                //MessageBox.Show("Please select a song output path.", "Error");
 
                 return;
             }

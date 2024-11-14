@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using SkiaSharp;
+using System.ComponentModel;
 using System.Windows;
 using UILayout;
 
@@ -18,6 +19,8 @@ namespace PsarcConverter
             Title = "PsarcConverter v0.1.3";
 
             InitializeComponent();
+
+            Layout.Current.DefaultFont = new UIFont { Typeface = SKTypeface.FromFamilyName("Arial", SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright), TextSize = 16 };
 
             ui.RootUIElement = mainInterface = new MainInterface();
 

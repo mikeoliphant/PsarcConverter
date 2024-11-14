@@ -15,6 +15,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnkExtractor", "Dependencie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rocksmith2014PsarcLib", "Dependencies\PsarcUtil\Dependencies\Rocksmith2014PsarcLib\Rocksmith2014PsarcLib.csproj", "{7B43C4EC-55A3-40B8-9640-04147049C0E3}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "PsarcConverterShared", "PsarcConverterShared\PsarcConverterShared.shproj", "{EADCD423-38CE-4D03-82A4-EB8C40C54ACE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PsarcConverterGL", "PsarcConverterGL\PsarcConverterGL.csproj", "{206A5643-0B91-46AB-AC79-744F4DFD47DD}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UILayout.MonoGame", "Dependencies\UILayout\UILayout.MonoGame\UILayout.MonoGame.shproj", "{D7307594-237F-43DA-BD6B-D0BC2BD9B276}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UILayout.MonoGame.DesktopGL", "Dependencies\UILayout\UILayout.MonoGame.DesktopGL\UILayout.MonoGame.DesktopGL.csproj", "{F05802D8-6CBC-4F7F-82C1-CD8175C85CD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +105,30 @@ Global
 		{7B43C4EC-55A3-40B8-9640-04147049C0E3}.Release|x64.Build.0 = Release|x64
 		{7B43C4EC-55A3-40B8-9640-04147049C0E3}.Release|x86.ActiveCfg = Release|Any CPU
 		{7B43C4EC-55A3-40B8-9640-04147049C0E3}.Release|x86.Build.0 = Release|Any CPU
+		{206A5643-0B91-46AB-AC79-744F4DFD47DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{206A5643-0B91-46AB-AC79-744F4DFD47DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{206A5643-0B91-46AB-AC79-744F4DFD47DD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{206A5643-0B91-46AB-AC79-744F4DFD47DD}.Debug|x64.Build.0 = Debug|Any CPU
+		{206A5643-0B91-46AB-AC79-744F4DFD47DD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{206A5643-0B91-46AB-AC79-744F4DFD47DD}.Debug|x86.Build.0 = Debug|Any CPU
+		{206A5643-0B91-46AB-AC79-744F4DFD47DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{206A5643-0B91-46AB-AC79-744F4DFD47DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{206A5643-0B91-46AB-AC79-744F4DFD47DD}.Release|x64.ActiveCfg = Release|Any CPU
+		{206A5643-0B91-46AB-AC79-744F4DFD47DD}.Release|x64.Build.0 = Release|Any CPU
+		{206A5643-0B91-46AB-AC79-744F4DFD47DD}.Release|x86.ActiveCfg = Release|Any CPU
+		{206A5643-0B91-46AB-AC79-744F4DFD47DD}.Release|x86.Build.0 = Release|Any CPU
+		{F05802D8-6CBC-4F7F-82C1-CD8175C85CD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F05802D8-6CBC-4F7F-82C1-CD8175C85CD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F05802D8-6CBC-4F7F-82C1-CD8175C85CD8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F05802D8-6CBC-4F7F-82C1-CD8175C85CD8}.Debug|x64.Build.0 = Debug|Any CPU
+		{F05802D8-6CBC-4F7F-82C1-CD8175C85CD8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F05802D8-6CBC-4F7F-82C1-CD8175C85CD8}.Debug|x86.Build.0 = Debug|Any CPU
+		{F05802D8-6CBC-4F7F-82C1-CD8175C85CD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F05802D8-6CBC-4F7F-82C1-CD8175C85CD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F05802D8-6CBC-4F7F-82C1-CD8175C85CD8}.Release|x64.ActiveCfg = Release|Any CPU
+		{F05802D8-6CBC-4F7F-82C1-CD8175C85CD8}.Release|x64.Build.0 = Release|Any CPU
+		{F05802D8-6CBC-4F7F-82C1-CD8175C85CD8}.Release|x86.ActiveCfg = Release|Any CPU
+		{F05802D8-6CBC-4F7F-82C1-CD8175C85CD8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,7 +137,13 @@ Global
 		SolutionGuid = {D6BF81B9-DA6D-4E2F-8790-3E6DEF860F81}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		PsarcConverterShared\PsarcConverterShared.projitems*{206a5643-0b91-46ab-ac79-744f4dfd47dd}*SharedItemsImports = 5
 		Dependencies\PsarcUtil\Dependencies\OpenSongChart\SongFormat\SongFormat.projitems*{5e4eff4b-5a94-4940-8055-6dfb7b974171}*SharedItemsImports = 5
+		PsarcConverterShared\PsarcConverterShared.projitems*{a0794f02-adc9-46ff-af90-5565c7426502}*SharedItemsImports = 5
 		Dependencies\UILayout\UILayout\UILayout.projitems*{ba7ddc20-3476-49be-a829-4f7f03aff2f0}*SharedItemsImports = 5
+		Dependencies\UILayout\UILayout.MonoGame\UILayout.MonoGame.projitems*{d7307594-237f-43da-bd6b-d0bc2bd9b276}*SharedItemsImports = 13
+		PsarcConverterShared\PsarcConverterShared.projitems*{eadcd423-38ce-4d03-82a4-eb8c40c54ace}*SharedItemsImports = 13
+		Dependencies\UILayout\UILayout.MonoGame\UILayout.MonoGame.projitems*{f05802d8-6cbc-4f7f-82c1-cd8175c85cd8}*SharedItemsImports = 5
+		Dependencies\UILayout\UILayout\UILayout.projitems*{f05802d8-6cbc-4f7f-82c1-cd8175c85cd8}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

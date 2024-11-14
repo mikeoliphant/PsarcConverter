@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>eadcd423-38ce-4d03-82a4-eb8c40c54ace</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>PsarcConverterShared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ConvertOptions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MainInterface.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Textures\ButtonPressed.png" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Textures\ButtonUnpressed.png" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Textures\Outline.png" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Textures\ShadowedOutline.png" />
+  </ItemGroup>
+</Project>
