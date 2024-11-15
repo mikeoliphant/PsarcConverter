@@ -202,15 +202,14 @@ namespace PsarcConverter
 
         void AddFolder()
         {
-            //if (openFolderDialog.ShowDialog() == DialogResult.OK)
-            //{
-            //    if (!string.IsNullOrEmpty(openFolderDialog.SelectedPath) && !convertOptions.ParseFolders.Contains(openFolderDialog.SelectedPath))
-            //    {
-            //        convertOptions.ParseFolders.Add(openFolderDialog.SelectedPath);
+            string newPath = Layout.Current.GetFolder("New Folder", null);
 
-            //        UpdateSources();
-            //    }
-            //}
+            if (!string.IsNullOrEmpty(newPath) && !convertOptions.ParseFolders.Contains(newPath))
+            {
+                convertOptions.ParseFolders.Add(newPath);
+
+                UpdateSources();
+            }
         }
 
         void DeleteFolder(string path)
@@ -222,17 +221,14 @@ namespace PsarcConverter
 
         void AddFile()
         {
-            //openFileDialog.Filter = "Psarc Files|*.psarc";
+            string newFile = Layout.Current.GetFile("Add File", null, "Psarc Files|*.psarc");
 
-            //if (openFileDialog.ShowDialog() == DialogResult.OK)
-            //{
-            //    if (!string.IsNullOrEmpty(openFileDialog.FileName) && !convertOptions.ParseFiles.Contains(openFileDialog.FileName))
-            //    {
-            //        convertOptions.ParseFiles.Add(openFileDialog.FileName);
+            if (!string.IsNullOrEmpty(newFile) && !convertOptions.ParseFiles.Contains(newFile))
+            {
+                convertOptions.ParseFiles.Add(newFile);
 
-            //        UpdateSources();
-            //    }
-            //}
+                UpdateSources();
+            }
         }
 
         void DeleteFile(string file)
@@ -316,7 +312,7 @@ namespace PsarcConverter
         {
             if (string.IsNullOrEmpty(convertOptions.SongOutputPath))
             {
-                //MessageBox.Show("Please select a song output path.", "Error");
+                Layout.Current.ShowContinuePopup("Please select a song output path.");
 
                 return;
             }
@@ -358,8 +354,7 @@ namespace PsarcConverter
             {
                 try
                 {
-                    if (!converter.ConvertPsarc(file))
-                        return;
+                    converter.ConvertPsarc(file);
                 }
                 catch { }
             }
@@ -368,8 +363,7 @@ namespace PsarcConverter
             {
                 try
                 {
-                    if (!converter.ConvertFolder(folder))
-                        return;
+                    converter.ConvertFolder(folder);
                 }
                 catch { }
             }
