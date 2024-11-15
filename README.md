@@ -13,3 +13,7 @@ The following external dependencies must be installed:
 - libogg
 - libvorbis
 - libgdiplus (on non-Windows platforms)
+
+On Windows, extract the downladed .zip file and run "PsarcConverter".
+
+On other platforms, extract the downloaded .zip file and run "PsarcConverterGL" (you will likely have to make it executable first: "chmod u+x PsarcConverterGL").
