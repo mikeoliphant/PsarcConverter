@@ -76,3 +76,45 @@ jobs:
         asset_path: ./PsarcConverterLinux.zip
         asset_name: PsarcConverterLinux.zip
         asset_content_type: application/zip
+
+    - name: Publish OSX-x64
+      working-directory: ${{github.workspace}}
+      run: dotnet publish .\PsarcConverterGL\PsarcConverterGL.csproj --runtime osx-x64 -p:PublishSingleFile=true --self-contained true
+
+    - name: Add OSX-x64 Archive
+      working-directory: ${{github.workspace}}
+      run: |
+        mkdir osx-x64-build
+        move PsarcConverterGL\bin\Release\net8.0\osx-x64\publish linux-x64-build\PsarcConverterGL
+        Compress-Archive -Path osx-x64-build\* -Destination PsarcConverterMacX64.zip
+
+    - name: Upload OSX-x64 Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ needs.create_release.outputs.upload_url }}
+        asset_path: ./PsarcConverterMacX64.zip
+        asset_name: PsarcConverterMacX64.zip
+        asset_content_type: application/zip
+
+    - name: Publish OSX-arm64
+      working-directory: ${{github.workspace}}
+      run: dotnet publish .\PsarcConverterGL\PsarcConverterGL.csproj --runtime osx-arm64 -p:PublishSingleFile=true --self-contained true
+
+    - name: Add OSX-arm64 Archive
+      working-directory: ${{github.workspace}}
+      run: |
+        mkdir osx-arm64-build
+        move PsarcConverterGL\bin\Release\net8.0\osx-x64\publish osx-arm64-build\PsarcConverterGL
+        Compress-Archive -Path osx-arm64-build\* -Destination PsarcConverterMacArm64.zip
+
+    - name: Upload OSX-arm64 Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ needs.create_release.outputs.upload_url }}
+        asset_path: ./PsarcConverterMacArm64.zip
+        asset_name: PsarcConverterMacArm64.zip
+        asset_content_type: application/zip
