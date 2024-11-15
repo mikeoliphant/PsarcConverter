@@ -64,7 +64,7 @@ jobs:
       working-directory: ${{github.workspace}}
       run: |
         mkdir linux-x64-build
-        move ChartPlayerJack\bin\Release\net8.0\linux-x64\publish linux-x64-build\PsarcConverterGL
+        move PsarcConverterGL\bin\Release\net8.0\linux-x64\publish linux-x64-build\PsarcConverterGL
         Compress-Archive -Path linux-x64-build\* -Destination PsarcConverterLinux.zip
 
     - name: Upload Linux-x64 Asset
