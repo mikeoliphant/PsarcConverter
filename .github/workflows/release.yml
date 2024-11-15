@@ -44,7 +44,7 @@ jobs:
       run: dotnet build --configuration Release
 
     - name: Create Archive
-      run: Compress-Archive -Path ${{github.workspace}}\PsarcConverter\bin\Release\net7.0-windows\* -Destination PsarcConverter.zip
+      run: Compress-Archive -Path ${{github.workspace}}\PsarcConverter\bin\Release\net8.0-windows\* -Destination PsarcConverter.zip
     
     - name: Upload Release Asset
       uses: actions/upload-release-asset@v1
