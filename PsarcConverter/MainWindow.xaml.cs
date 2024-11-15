@@ -16,7 +16,7 @@ namespace PsarcConverter
 
         public MainWindow()
         {
-            Title = "PsarcConverter v0.1.3";
+            Title = "PsarcConverter v0.1.4";
 
             InitializeComponent();
 
