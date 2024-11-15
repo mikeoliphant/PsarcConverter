@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PsarcConverter", "PsarcConv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UILayout.Skia.WPF", "Dependencies\UILayout\UILayout.Skia.WPF\UILayout.Skia.WPF.csproj", "{2BDB0AB7-1074-43C4-BFF9-E7B22FF19C4A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UILayout.Skia", "Dependencies\UILayout\UILayout.Skia\UILayout.Skia.csproj", "{BA7DDC20-3476-49BE-A829-4F7F03AFF2F0}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PsarcUtil", "Dependencies\PsarcUtil\PsarcUtil\PsarcUtil.csproj", "{5E4EFF4B-5A94-4940-8055-6DFB7B974171}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BnkExtractor", "Dependencies\PsarcUtil\Dependencies\BnkExtractor\BnkExtractor\BnkExtractor.csproj", "{CD1D23EF-2D72-443B-B70F-C68BE05A5EBB}"
@@ -22,6 +20,8 @@ EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UILayout.MonoGame", "Dependencies\UILayout\UILayout.MonoGame\UILayout.MonoGame.shproj", "{D7307594-237F-43DA-BD6B-D0BC2BD9B276}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UILayout.MonoGame.DesktopGL", "Dependencies\UILayout\UILayout.MonoGame.DesktopGL\UILayout.MonoGame.DesktopGL.csproj", "{F05802D8-6CBC-4F7F-82C1-CD8175C85CD8}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "UILayout.Skia", "Dependencies\UILayout\UILayout.Skia\UILayout.Skia.shproj", "{43920506-574A-4227-9759-5C55C3D54A9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,18 +57,6 @@ Global
 		{2BDB0AB7-1074-43C4-BFF9-E7B22FF19C4A}.Release|x64.Build.0 = Release|Any CPU
 		{2BDB0AB7-1074-43C4-BFF9-E7B22FF19C4A}.Release|x86.ActiveCfg = Release|Any CPU
 		{2BDB0AB7-1074-43C4-BFF9-E7B22FF19C4A}.Release|x86.Build.0 = Release|Any CPU
-		{BA7DDC20-3476-49BE-A829-4F7F03AFF2F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BA7DDC20-3476-49BE-A829-4F7F03AFF2F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BA7DDC20-3476-49BE-A829-4F7F03AFF2F0}.Debug|x64.ActiveCfg = Debug|x64
-		{BA7DDC20-3476-49BE-A829-4F7F03AFF2F0}.Debug|x64.Build.0 = Debug|x64
-		{BA7DDC20-3476-49BE-A829-4F7F03AFF2F0}.Debug|x86.ActiveCfg = Debug|x86
-		{BA7DDC20-3476-49BE-A829-4F7F03AFF2F0}.Debug|x86.Build.0 = Debug|x86
-		{BA7DDC20-3476-49BE-A829-4F7F03AFF2F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BA7DDC20-3476-49BE-A829-4F7F03AFF2F0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BA7DDC20-3476-49BE-A829-4F7F03AFF2F0}.Release|x64.ActiveCfg = Release|x64
-		{BA7DDC20-3476-49BE-A829-4F7F03AFF2F0}.Release|x64.Build.0 = Release|x64
-		{BA7DDC20-3476-49BE-A829-4F7F03AFF2F0}.Release|x86.ActiveCfg = Release|x86
-		{BA7DDC20-3476-49BE-A829-4F7F03AFF2F0}.Release|x86.Build.0 = Release|x86
 		{5E4EFF4B-5A94-4940-8055-6DFB7B974171}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5E4EFF4B-5A94-4940-8055-6DFB7B974171}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E4EFF4B-5A94-4940-8055-6DFB7B974171}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -140,9 +128,9 @@ Global
 		PsarcConverterShared\PsarcConverterShared.projitems*{206a5643-0b91-46ab-ac79-744f4dfd47dd}*SharedItemsImports = 5
 		Dependencies\UILayout\UILayout.Skia\UILayout.Skia.projitems*{2bdb0ab7-1074-43c4-bff9-e7b22ff19c4a}*SharedItemsImports = 5
 		Dependencies\UILayout\UILayout\UILayout.projitems*{2bdb0ab7-1074-43c4-bff9-e7b22ff19c4a}*SharedItemsImports = 5
+		Dependencies\UILayout\UILayout.Skia\UILayout.Skia.projitems*{43920506-574a-4227-9759-5c55c3d54a9a}*SharedItemsImports = 13
 		Dependencies\PsarcUtil\Dependencies\OpenSongChart\SongFormat\SongFormat.projitems*{5e4eff4b-5a94-4940-8055-6dfb7b974171}*SharedItemsImports = 5
 		PsarcConverterShared\PsarcConverterShared.projitems*{a0794f02-adc9-46ff-af90-5565c7426502}*SharedItemsImports = 5
-		Dependencies\UILayout\UILayout\UILayout.projitems*{ba7ddc20-3476-49be-a829-4f7f03aff2f0}*SharedItemsImports = 5
 		Dependencies\UILayout\UILayout.MonoGame\UILayout.MonoGame.projitems*{d7307594-237f-43da-bd6b-d0bc2bd9b276}*SharedItemsImports = 13
 		PsarcConverterShared\PsarcConverterShared.projitems*{eadcd423-38ce-4d03-82a4-eb8c40c54ace}*SharedItemsImports = 13
 		Dependencies\UILayout\UILayout.MonoGame\UILayout.MonoGame.projitems*{f05802d8-6cbc-4f7f-82c1-cd8175c85cd8}*SharedItemsImports = 5
