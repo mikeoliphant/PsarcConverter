@@ -16,4 +16,8 @@ The following external dependencies must be installed:
 
 On Windows, extract the downladed .zip file and run "PsarcConverter".
 
-On other platforms, extract the downloaded .zip file and run "PsarcConverterGL" (you will likely have to make it executable first: "chmod u+x PsarcConverterGL").
+On other platforms, extract the downloaded .zip file and run "PsarcConverterGL". You will likely have to make it executable first:
+
+```
+chmod u+x PsarcConverterGL
+```
